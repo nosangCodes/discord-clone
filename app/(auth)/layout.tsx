@@ -6,9 +6,6 @@ type Props = {
 
 export default function layout({ children }: Props) {
   return (
-    <div>
-      <h1>Auth layout</h1>
-      {children}
-    </div>
+    <div className="h-full flex justify-center items-center">{children}</div>
   );
 }
