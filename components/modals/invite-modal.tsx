@@ -16,11 +16,12 @@ import { Button } from "../ui/button";
 import { useOrifin } from "@/hooks/use-origin";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import axios from "axios";
 
 type Props = {};
 
 export default function InviteModal({}: Props) {
-  const { isOpen, onClose, type, data } = useModal();
+  const { onOpen, isOpen, onClose, type, data } = useModal();
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
   const { server } = data;
@@ -38,23 +39,19 @@ export default function InviteModal({}: Props) {
     }, 1000);
   };
 
-  const onGenerateNewLink = () => {
-    console.log("clicked");
+  const onGenerateNewLink = async () => {
     try {
       setLoading(true);
+      const response = await axios.patch(
+        `/api/servers/${server?.id}/invite-code`
+      );
+      onOpen("invite", { server: response.data });
     } catch (error) {
       console.error(error);
     } finally {
-      console.log("finally");
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
+      setLoading(false);
     }
   };
-
-  useEffect(() => {
-    console.log("loading", loading);
-  }, [loading]);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
