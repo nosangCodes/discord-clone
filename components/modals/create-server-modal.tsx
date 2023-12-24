@@ -130,7 +130,7 @@ export default function CreateServerModal({}: Props) {
               />
             </div>
             <DialogFooter className="bg-gray-400 px-6 py-4">
-              <Button variant={"primary"}>Submit</Button>
+              <Button disabled={isLoading} variant={"primary"}>Submit</Button>
             </DialogFooter>
           </form>
         </Form>
