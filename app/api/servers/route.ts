@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { v4 as uuidv4 } from "uuid";
 import { NextResponse } from "next/server";
 import { MemberRole } from "@prisma/client";
+import { EXPORT_DETAIL } from "next/dist/shared/lib/constants";
 
 export const POST = async (req: Request) => {
   try {
@@ -41,3 +42,4 @@ export const POST = async (req: Request) => {
     return new NextResponse("Internal server error", { status: 500 });
   }
 };
+
