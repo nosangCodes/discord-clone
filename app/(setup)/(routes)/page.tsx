@@ -9,7 +9,6 @@ type Props = {};
 
 export default async function SetupPage({}: Props) {
   const profile = await initialProfile();
-  console.log("🚀 ~ file: page.tsx:12 ~ SetupPage ~ profile:", profile)
   const server = await db.server.findFirst({
     where: {
       profileId: profile.id,
