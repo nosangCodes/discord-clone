@@ -32,7 +32,7 @@ export default function ServerMember({ member, server }: Props) {
     >
       <UserAvatar
         src={member.profile.imageUrl}
-        className="h-6 w-6 md:h-10 md:w-10"
+        className="h-4 w-4 md:h-8 md:w-8"
       />
       <p
         className={cn(
