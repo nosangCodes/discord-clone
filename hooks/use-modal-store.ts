@@ -3,11 +3,12 @@ import { create } from "zustand";
 
 export type ModalType =
   | "createServer"
-  | "invite"
   | "editServer"
+  | "leaveServer"
+  | "invite"
   | "members"
   | "createChannel"
-  | "leaveServer"
+  | "editChannel"
   | "deleteServer"
   | "deleteChannel";
 
