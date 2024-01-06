@@ -1,9 +1,10 @@
-import ChatHeader from "@/components/chat/ChatHeader";
-import currentProfile from "@/lib/current-ptofile";
 import { db } from "@/lib/db";
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
+import ChatHeader from "@/components/chat/ChatHeader";
+import ChatInput from "@/components/chat/chat-input";
+import currentProfile from "@/lib/current-ptofile";
 type Props = {
   params: {
     serverId: string;
@@ -39,6 +40,16 @@ export default async function ChannelIdPage({ params }: Props) {
         type="channel"
         name={channel.name}
         serverId={params.serverId}
+      />
+      <div className="flex-1">Futire messages</div>
+      <ChatInput
+        name={channel.name}
+        type="channel"
+        apiUrl="/api/socket/messages"
+        query={{
+          channelId: channel.id,
+          serverId: channel.serverId,
+        }}
       />
     </div>
   );
