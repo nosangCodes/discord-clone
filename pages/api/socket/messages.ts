@@ -37,7 +37,46 @@ export default async function handler(
 
     if (!server?.id)
       return res.status(404).json({ message: "Server not found!" });
-    
+
+    const channel = await db.channel.findFirst({
+      where: {
+        serverId: serverId as string,
+        id: channelId as string,
+      },
+    });
+
+    if (!channel?.id)
+      return res.status(404).json({ message: "Channel not found!" });
+
+    const member = server.Member.find(
+      (member) => member.profileId === profile.id
+    );
+
+    if (!member) {
+      return res.status(404).json({ message: "Member not found!" });
+    }
+
+    const message = await db.message.create({
+      data: {
+        content,
+        fileUrl,
+        channelId: channelId as string,
+        memberId: member.id,
+      },
+      include: {
+        member: {
+          include: {
+            profile: true,
+          },
+        },
+      },
+    });
+
+    // also emit socket
+    const channelKey = `chat:${channelId}:messages`;
+    res?.socket?.server?.io.emit(channelKey, message);
+
+    return res.status(200).json(message);
   } catch (error) {
     console.error("[MESSAGES_POST]", error);
   }
