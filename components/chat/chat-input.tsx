@@ -67,6 +67,7 @@ export default function ChatInput({ apiUrl, query, name, type }: Props) {
                     <Plus className="text-white dark:text-[#313338]" />
                   </button>
                   <Input
+                    autoFocus
                     {...field}
                     placeholder={`Message ${
                       type === "channel" ? "#" + name : name

@@ -5,6 +5,8 @@ import currentProfile from "@/lib/current-ptofile";
 import { db } from "@/lib/db";
 import { getOrCreateConversation } from "@/lib/conversation";
 import ChatHeader from "@/components/chat/ChatHeader";
+import ChatMessages from "@/components/chat/chat-messages";
+import ChatInput from "@/components/chat/chat-input";
 
 type Props = {
   params: {
@@ -49,6 +51,25 @@ export default async function MemberIdPage({ params }: Props) {
         name={otherMember.profile.name}
         type="conversation"
         serverId={params.serverId}
+      />
+      <ChatMessages
+        member={currentMember}
+        name={otherMember.profile.name}
+        chatId={conversation.id}
+        type="conversation"
+        apiUrl="/api/direct-messages"
+        paramKey="conversationId"
+        paramValue={conversation.id}
+        socketUrl="/api/socket/direct-messages"
+        socketQuery={{
+          conversationId: conversation.id,
+        }}
+      />
+      <ChatInput
+        name={otherMember.profile.name}
+        apiUrl="/api/socket/direct-messages"
+        type="conversation"
+        query={{ conversationId: conversation.id }}
       />
     </div>
   );
