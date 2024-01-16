@@ -7,7 +7,7 @@ import currentProfile from "@/lib/current-ptofile";
 import ChatMessages from "@/components/chat/chat-messages";
 import { ChannelType } from "@prisma/client";
 import { MediaRoom } from "@/components/media-room";
-import { ChatHeader } from "@/components/chat/ChatHeader";
+import ChatHeader from "@/components/chat/ChatHeader";
 
 type Props = {
   params: {
@@ -23,13 +23,13 @@ export default async function ChannelIdPage({ params }: Props) {
 
   const channel = await db.channel.findUnique({
     where: {
-      id: params.channelId,
+      id: params?.channelId,
     },
   });
 
   const member = await db.member.findFirst({
     where: {
-      serverId: params.serverId,
+      serverId: params?.serverId,
       profileId: profile.id,
     },
   });
@@ -43,7 +43,7 @@ export default async function ChannelIdPage({ params }: Props) {
       <ChatHeader
         type="channel"
         name={channel.name}
-        serverId={params.serverId}
+        serverId={params?.serverId}
       />
       {channel.type === ChannelType.TEXT && (
         <>

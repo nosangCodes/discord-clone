@@ -13,7 +13,7 @@ export default async function ServerIdPage({ params }: Props) {
 
   const server = await db.server.findUnique({
     where: {
-      id: params.serverId,
+      id: params?.serverId,
       Member: {
         some: {
           profileId: profile.id,
@@ -38,7 +38,7 @@ export default async function ServerIdPage({ params }: Props) {
 
   if (initialChannel?.id) {
     return redirect(
-      `/servers/${params.serverId}/channels/${initialChannel?.id}`
+      `/servers/${params?.serverId}/channels/${initialChannel?.id}`
     );
   }
 

@@ -25,14 +25,14 @@ export default function NavigationItem({ id, name, imageUrl }: Props) {
         <div
           className={cn(
             "absolute left-0 rounded-r-full bg-primary transition-all w-[4px]",
-            params.serverId !== id && "group-hover:h-[20px]",
-            params.serverId === id ? "h-[36px]" : "h-[8px]"
+            params?.serverId !== id && "group-hover:h-[20px]",
+            params?.serverId === id ? "h-[36px]" : "h-[8px]"
           )}
         />
         <div
           className={cn(
             "relative group flex mx-3 h-[48px] w-[48px] bg-primary rounded-[24px] group-hover:rounded-[16px] transition-all overflow-hidden",
-            params.serverId === id &&
+            params?.serverId === id &&
               "rounded-[16px] bg-primary/10 text-primary"
           )}
         >

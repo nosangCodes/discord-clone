@@ -9,7 +9,7 @@ export const DELETE = async (
 ) => {
   try {
     const { searchParams } = new URL(req.url);
-    const serverId = searchParams.get("serverId");
+    const serverId = searchParams?.get("serverId");
     const profile = await currentProfile();
 
     if (!profile) {
@@ -18,7 +18,7 @@ export const DELETE = async (
     if (!serverId)
       return new NextResponse("Server id is missing", { status: 400 });
 
-    if (!params.channelId)
+    if (!params?.channelId)
       return new NextResponse("Channel id is missing", { status: 400 });
 
     const server = await db.server.update({
@@ -36,7 +36,7 @@ export const DELETE = async (
       data: {
         Channel: {
           delete: {
-            id: params.channelId,
+            id: params?.channelId,
             name: {
               not: "general",
             },
@@ -57,7 +57,7 @@ export const PATCH = async (
 ) => {
   try {
     const { searchParams } = new URL(req.url);
-    const serverId = searchParams.get("serverId");
+    const serverId = searchParams?.get("serverId");
     const profile = await currentProfile();
 
     if (!profile) {
@@ -66,7 +66,7 @@ export const PATCH = async (
     if (!serverId)
       return new NextResponse("Server id is missing", { status: 400 });
 
-    if (!params.channelId)
+    if (!params?.channelId)
       return new NextResponse("Channel id is missing", { status: 400 });
 
     const { name, type } = await req.json();
@@ -91,7 +91,7 @@ export const PATCH = async (
         Channel: {
           update: {
             where: {
-              id: params.channelId,
+              id: params?.channelId,
               name: {
                 not: "general",
               },

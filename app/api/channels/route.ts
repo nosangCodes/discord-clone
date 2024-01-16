@@ -9,7 +9,7 @@ export const POST = async (req: Request) => {
     const profile = await currentProfile();
     if (!profile) return new NextResponse("Unauthorized", { status: 400 });
 
-    const serverId = searchParams.get("serverId");
+    const serverId = searchParams?.get("serverId");
     if (!serverId)
       return new NextResponse("Server id is missing", { status: 401 });
 

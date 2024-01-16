@@ -9,8 +9,8 @@ export const GET = async (req: Request) => {
   try {
     const profile = await currentProfile();
     const { searchParams } = new URL(req.url);
-    const cursor = searchParams.get("cursor");
-    const channelId = searchParams.get("channelId");
+    const cursor = searchParams?.get("cursor");
+    const channelId = searchParams?.get("channelId");
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
